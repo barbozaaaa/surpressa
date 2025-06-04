@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para o Amor da Minha Vida</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(#ffe6f0, #fff0f5);
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #ffcce5;
+      position: relative;
+    }
+    header h1 {
+      font-size: 3em;
+      color: #ff3399;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      transform: rotate(45deg);
+      animation: fall 6s infinite;
+      opacity: 0.7;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes fall {
+      0% { top: -50px; }
+      100% { top: 100vh; }
+    }
+    .section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .gallery img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 0 5px #ff66b2;
+    }
+    .letter {
+      background: #fff0f5;
+      border-radius: 15px;
+      padding: 30px;
+      width: 80%;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+    .surprise {
+      margin-top: 30px;
+    }
+    .btn-surpresa {
+      background-color: #ff66b2;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1em;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px #cc0066;
+    }
+    .final {
+      font-size: 2em;
+      margin-top: 40px;
+      color: #ff3399;
+    }
+    .scratch-card {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 40px auto;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .scratch-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #ff3399;
+      z-index: 0;
+    }
+    .memory-game {
+      display: grid;
+      grid-template-columns: repeat(4, 80px);
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .memory-card {
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 5px #ff66b2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      cursor: pointer;
+      user-select: none;
+    }
+    .memory-card.flipped {
+      background-color: #ffccdd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Para o Amor da Minha Vida 💖</h1>
+    <script>
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = 3 + Math.random() * 3 + 's';
+        document.querySelector('header').appendChild(heart);
+      }
+    </script>
+  </header>
+
+  <section class="section gallery">
+    <h2>Nossas Memórias 📸</h2>
+    <img src="foto1.jpeg" alt="foto 1" />
+    <img src="foto3.jpeg" alt="foto 2" />
+    <img src="foto4.jpeg" alt="foto 3" />
+    <img src="foto2.jpeg" alt="foto 4" />
+    <img src="foto8.jpeg" alt="foto 5" />
+    <img src="foto9.jpeg" alt="foto 6" />
+    <img src="foto.capa.jpeg" alt="foto 7" />
+    <img src="foto6.jpeg" alt="foto 8" />
+  </section>
+
+  <section class="section">
+    <h2>Uma Carta para Você 💌</h2>
+    <div class="letter" id="letter">
+      minha vidaa desde que você entrou na minha vida, tudo ficou mais bonito. Cada momento ao seu lado é um presente, e eu quero te lembrar todos os dias do quanto você é especial. 💕
+    </div>
+  </section>
+
+  <section class="section surprise">
+    <button class="btn-surpresa" onclick="mostrarSurpresa()">Clique aqui para uma surpresa 🎁</button>
+    <div id="mensagem-surpresa" style="display:none; margin-top:20px; font-size:1.4em; color:#ff3399;">
+      Eu te amo mais do que palavras podem dizer! 💗💗💗
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Raspadinha do Amor 💘</h2>
+    <div class="scratch-card">
+      <div class="scratch-message">EU TE AMO AO INFINITO E ALÉM ✨</div>
+      <canvas id="scratchCanvas" width="300" height="300"></canvas>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Jogo da Memória 💞</h2>
+    <div class="memory-game" id="memoryGame"></div>
+  </section>
+
+  <section class="section">
+    <div class="final">Eu te amo! 💖 Te quiero! 💕 I love you! ❤️</div>
+  </section>
+
+  <script>
+    function mostrarSurpresa() {
+      document.getElementById('mensagem-surpresa').style.display = 'block';
+      const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+      audio.play();
+    }
+
+    // Raspadinha
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ccc';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.globalCompositeOperation = 'destination-out';
+
+    let isDrawing = false;
+
+    canvas.addEventListener('mousedown', () => isDrawing = true);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mousemove', (e) => {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      ctx.beginPath();
+      ctx.arc(x, y, 15, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Jogo da memória
+    const emojis = ['💖','💖','💘','💘','💕','💕','😍','😍'];
+    const gameBoard = document.getElementById('memoryGame');
+    let selected = [];
+    let locked = false;
+
+    function createBoard() {
+      const shuffled = emojis.sort(() => 0.5 - Math.random());
+      shuffled.forEach((emoji, i) => {
+        const card = document.createElement('div');
+        card.classList.add('memory-card');
+        card.dataset.emoji = emoji;
+        card.addEventListener('click', () => flipCard(card));
+        gameBoard.appendChild(card);
+      });
+    }
+
+    function flipCard(card) {
+      if (locked || card.classList.contains('flipped') || selected.length === 2) return;
+      card.textContent = card.dataset.emoji;
+      card.classList.add('flipped');
+      selected.push(card);
+
+      if (selected.length === 2) {
+        locked = true;
+        if (selected[0].dataset.emoji === selected[1].dataset.emoji) {
+          selected = [];
+          locked = false;
+        } else {
+          setTimeout(() => {
+            selected.forEach(c => {
+              c.textContent = '';
+              c.classList.remove('flipped');
+            });
+            selected = [];
+            locked = false;
+          }, 1000);
+        }
+      }
+    }
+
+    createBoard();
+  </script>
+</body>
+</html>
